@@ -31,6 +31,10 @@ const handleRegister = (req, res, knex, bcrypt) => {
                     trx.commit();
                     res.json(users[0]);
                   });
+              })
+              .catch((err) => {
+                trx.rollback();
+                res.status(400).json("unable to register");
               });
           });
       })
